@@ -2,3 +2,5 @@ Dataset/*
 src.zip
 Docs/*
 test.py
+Regularization/*
+Q_learning/Proposal_sampling.py
