@@ -2,14 +2,15 @@ import torch
 from torch.nn import functional as F
 from Actor import Actor
 from Critic import DoubleQCritic
+from Reward_function.Reward import Reward
 
 class CQL:
     
-    def __init__(self, actor, critic, state_dim, action_dim, discount, optimizer, alpha_prime, temperature) -> None:
+    def __init__(self, actor, critic, rewarder,state_dim, action_dim, discount, optimizer, alpha_prime, temperature) -> None:
         
         self.actor = actor
         self.critic = critic
-        # self.rewarder = rewarder
+        self.rewarder = rewarder
         
         self.state_dim = state_dim
         self.action_dim = action_dim
@@ -95,10 +96,12 @@ if __name__=='__main__':
     
     actor = Actor()
     critic = DoubleQCritic(state_dim=100, action_dim=10, hidden_dim=[16,32,64])
+    rewarder = Reward()
     
     agent = CQL(
         actor=actor,
         critic=critic,
+        rewarder=rewarder,
         state_dim=100,
         action_dim=10,
         discount=0.9,
